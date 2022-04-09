@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
+/** router.get('/test-me', function (req, res) {
     // let a = { msg: "My first ever API response in JSON !!"} 
 
 
@@ -63,8 +63,64 @@ router.post('/test-post2', function (req, res) {
 
 const randomController= require("../controllers/randomController.js")
 //write a post request to accept an element in post request body and add it to the given array and return the new array
-router.post('/test-post3', randomController.addToArray ); //HANDLER/CONTROLLER
+router.post('/test-post3', randomController.addToArray ); //HANDLER/CONTROLLER **/
 
 
+let players= [
+    {
+        "name":"MSDhoni",
+        "dob":"07/07/1981",
+        "gender":"male",
+        "city":"Ranchi",
+        "sports":["cricket"]
+
+
+    },
+    {
+        "name":"Rohit",
+        "dob":"30/04/1987",
+        "gender":"male",
+        "city":"Nagpur",
+        "sports":["cricket"]
+    },
+    {
+        "name":"Sunil",
+        "dob":"03/08/1984",
+        "gender":"male",
+        "city":"Secunderabad",
+        "sports":["football"]
+    },
+    {
+        "name":"Virat",
+        "dob":"05/11/1988",
+        "gender":"male",
+        "city":"Ranchi",
+        "sports":["cricket"]
+    },
+    {
+        "name":"MSDhoni",
+        "dob":"07/07/1981",
+        "gender":"male",
+        "city":"Ranchi",
+        "sports":["cricket"]
+    }
+
+];
+
+let arr=[];
+router.post('/players', function(req,res) { 
+      for( let i=0;i<players.length;i++){
+         arr.push(players[i]);  
+        }
+        for( let j=0; j<arr.length; j++){
+            for( let k=j+1; k<arr.length; k++){
+               if(arr[j].name === arr[k].name){
+                   arr.splice(k,1);
+               }
+            }
+        }
+    res.send(arr);
+ });
+    
 
 module.exports = router;
